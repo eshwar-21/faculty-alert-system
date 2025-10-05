@@ -1,5 +1,3 @@
-# faculty-alert-system
-
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
 LiquidCrystal_I2C lcd(0x27, 16, 2);
@@ -124,6 +122,7 @@ void loop()
   Serial.println(digitalRead(mode_button));
   if (digitalRead(mode_button) == HIGH)
   {
+
     DateTime now = rtc.now();
     int unit_hh = now.hour();
     int unit_mm = now.minute();
@@ -145,9 +144,11 @@ void loop()
     lcd.setCursor(0, 1);
     lcd.print("Day :" + String(daysOfTheWeek[now.dayOfTheWeek()]));
     delay(2000);
+
     if (String(daysOfTheWeek[now.dayOfTheWeek()]) != "Sunday")
     {
       convert_time(8, 50, 9, 40); //1st period
+
       if (currentTime >= startTime && currentTime <= endTime)  // Check if the current time falls within the specified range
       {
         lcd.clear();
@@ -155,14 +156,17 @@ void loop()
         lcd.print("1st-Period");
         readSchedule(A, A_1st); //YEAR,PERIOD NUMBER
         delay(2000);
+
         lcd.clear();
         lcd.setCursor(0, 0);
         lcd.print("A-Sub:" + Sub);
         lcd.setCursor(0, 1);
         lcd.print("Faculty:" + Name);
         delay(2000);
+
         if (period_1 == true)
           sendSMS(Number, "Dear Sir/Madam\n You have a class to Sec-A\nSubject:" + Sub);
+
         readSchedule(B, B_1st); //YEAR,PERIOD NUMBER
         delay(100);
         lcd.clear();
@@ -171,11 +175,15 @@ void loop()
         lcd.setCursor(0, 1);
         lcd.print("Faculty:" + Name);
         delay(2000);
+
         if (period_1 == true)
           sendSMS(Number, "Dear Sir/Madam\n You have a class to Sec-B\nSubject:" + Sub);
+
         period_1 = false;
       }
+
       convert_time(9, 40, 10, 30); //2nd period
+
       if (currentTime >= startTime && currentTime <= endTime) // Check if the current time falls within the specified range
       {
         lcd.clear();
@@ -189,8 +197,10 @@ void loop()
         lcd.setCursor(0, 1);
         lcd.print("Faculty:" + Name);
         delay(2000);
+
         if (period_2 == true)
           sendSMS(Number, "Dear Sir/Madam\n You have a class to Sec-A\nSubject:" + Sub);
+
         readSchedule(B, B_2nd); //YEAR,PERIOD NUMBER
         delay(100);
         lcd.clear();
@@ -199,10 +209,12 @@ void loop()
         lcd.setCursor(0, 1);
         lcd.print("Faculty:" + Name);
         delay(2000);
+
         if (period_2 == true)
           sendSMS(Number, "Dear Sir/Madam\n You have a class to Sec-B\nSubject:" + Sub);
         period_2 = false;
       }
+
       convert_time(10, 30, 10, 50); //Break
       // Check if the current time falls within the specified range
       if (currentTime >= startTime && currentTime <= endTime)
@@ -215,7 +227,9 @@ void loop()
         lcd.print("    Break     ");
         delay(2000);
       }
+
       convert_time(10, 50, 11, 40); //3rd period
+
       if (currentTime >= startTime && currentTime <= endTime) // Check if the current time falls within the specified range
       {
         lcd.clear();
@@ -229,8 +243,10 @@ void loop()
         lcd.setCursor(0, 1);
         lcd.print("Faculty:" + Name);
         delay(2000);
+
         if (period_3 == true)
           sendSMS(Number, "Dear Sir/Madam\n You have a class to Sec-A\nSubject:" + Sub);
+
         readSchedule(B, B_3rd); //YEAR,PERIOD NUMBER
         delay(100);
         lcd.clear();
@@ -239,11 +255,15 @@ void loop()
         lcd.setCursor(0, 1);
         lcd.print("Faculty:" + Name);
         delay(2000);
+
         if (period_3 == true)
           sendSMS(Number, "Dear Sir/Madam\n You have a class to Sec-B\nSubject:" + Sub);
+
         period_3 = false;
       }
+
       convert_time(11, 40, 12, 30); //4th period
+
       if (currentTime >= startTime && currentTime <= endTime) // Check if the current time falls within the specified range
       {
         lcd.clear();
@@ -257,8 +277,10 @@ void loop()
         lcd.setCursor(0, 1);
         lcd.print("Faculty:" + Name);
         delay(2000);
+
         if (period_4 == true)
           sendSMS(Number, "Dear Sir/Madam\n You have a class to Sec-A\nSubject:" + Sub);
+
         readSchedule(B, B_4th); //YEAR,PERIOD NUMBER
         delay(100);
         lcd.clear();
@@ -267,22 +289,30 @@ void loop()
         lcd.setCursor(0, 1);
         lcd.print("Faculty:" + Name);
         delay(2000);
+
         if (period_4 == true)
           sendSMS(Number, "Dear Sir/Madam\n You have a class to Sec-B\nSubject:" + Sub);
+
         period_4 = false;
       }
+
       convert_time(12, 30, 13, 20); //Lunch
+
       if (currentTime >= startTime && currentTime <= endTime)       // Check if the current time falls within the specified range
       {
         lcd.clear();
         lcd.setCursor(0, 0);
         lcd.print("      ");
+
+
         lcd.clear();
         lcd.setCursor(0, 0);
         lcd.print("Lunch Break     ");
         delay(2000);
       }
+
       convert_time(13, 20, 14, 10); //5th period
+
       if (currentTime >= startTime && currentTime <= endTime) // Check if the current time falls within the specified range
       {
         lcd.clear();
@@ -290,14 +320,18 @@ void loop()
         lcd.print("5th-Period");
         readSchedule(A, A_5th); //YEAR,PERIOD NUMBER
         delay(2000);
+
         lcd.clear();
         lcd.setCursor(0, 0);
         lcd.print("A-Sub:" + Sub);
         lcd.setCursor(0, 1);
         lcd.print("Faculty:" + Name);
         delay(2000);
+
         if (period_5 == true)
           sendSMS(Number, "Dear Sir/Madam\n You have a class to Sec-A\nSubject:" + Sub);
+
+
         readSchedule(B, B_5th); //YEAR,PERIOD NUMBER
         delay(100);
         lcd.clear();
@@ -306,10 +340,12 @@ void loop()
         lcd.setCursor(0, 1);
         lcd.print("Faculty:" + Name);
         delay(2000);
+
         if (period_5 == true)
           sendSMS(Number, "Dear Sir/Madam\n You have a class to Sec-B\nSubject:" + Sub);
         period_5 = false;
       }
+
       convert_time(14, 10, 15, 00); //6th Period
       // Check if the current time falls within the specified range
       if (currentTime >= startTime && currentTime <= endTime)
@@ -326,8 +362,11 @@ void loop()
         lcd.setCursor(0, 1);
         lcd.print("Faculty:" + Name);
         delay(2000);
+
         if (period_6 == true)
           sendSMS(Number, "Dear Sir/Madam\n You have a class to Sec-A\nSubject:" + Sub);
+
+
         readSchedule(B, B_6th); //YEAR,PERIOD NUMBER
         delay(100);
         lcd.clear();
@@ -336,10 +375,14 @@ void loop()
         lcd.setCursor(0, 1);
         lcd.print("Faculty:" + Name);
         delay(2000);
+
         if (period_6 == true)
           sendSMS(Number, "Dear Sir/Madam\n You have a class to Sec-B\nSubject:" + Sub);
+
+
         period_6 = false;
       }
+
       convert_time(15, 00, 16, 50); //7th period
       // Check if the current time falls within the specified range
       if (currentTime >= startTime && currentTime <= endTime)
@@ -347,16 +390,20 @@ void loop()
         lcd.clear();
         lcd.setCursor(0, 0);
         lcd.print("7th-Period");
+
         readSchedule(A, A_7th); //YEAR,PERIOD NUMBER
         delay(2000);
+
         lcd.clear();
         lcd.setCursor(0, 0);
         lcd.print("A-Sub:" + Sub);
         lcd.setCursor(0, 1);
         lcd.print("Faculty:" + Name);
         delay(2000);
+
         if (period_7 == true)
           sendSMS(Number, "Dear Sir/Madam\n You have a class to Sec-A\nSubject:" + Sub);
+
         readSchedule(B, B_7th); //YEAR,PERIOD NUMBER
         delay(100);
         lcd.clear();
@@ -365,10 +412,13 @@ void loop()
         lcd.setCursor(0, 1);
         lcd.print("Faculty:" + Name);
         delay(2000);
+
         if (period_7 == true)
           sendSMS(Number, "Dear Sir/Madam\n You have a class to Sec-B\nSubject:" + Sub);
+
         period_7 = false;
       }
+
       convert_time(16, 50, 23, 59); //Thank you
       // Check if the current time falls within the specified range
       if (currentTime >= startTime && currentTime <= endTime)
@@ -380,15 +430,20 @@ void loop()
         period_5 = true;
         period_6 = true;
         period_7 = true;
+
         lcd.clear();
         lcd.setCursor(0, 0);
         lcd.print("  Thank you!    ");
         delay(2000);
+
       }
+
       convert_time(01, 00, 8, 50); //Welcome
       // Check if the current time falls within the specified range
       if (currentTime >= startTime && currentTime <= endTime)
       {
+
+
         lcd.clear();
         lcd.setCursor(0, 0);
         lcd.print("   Welcome     ");
@@ -432,6 +487,7 @@ ay:
           year = Serial.parseInt();
           Serial.println(year);
           if (year < 1 || year > 3) {
+
             //return;
             if (year == 0)
             {
@@ -460,7 +516,9 @@ ap:
               //return;
               goto ap;
             }
+
           }
+
           // Check if the user wants to view or update the schedule
 vu:
           Serial.readString();
@@ -484,28 +542,35 @@ vu:
           }
         }
       }
+
       if (cmd == 'T' || cmd == 't')
       {
+
         Serial.readString();
         Serial.println("Enter hours");
         while (!Serial.available()) {}
         int hh = Serial.parseInt();
+
         Serial.readString();
         Serial.println("Enter minutes");
         while (!Serial.available()) {}
         int mm = Serial.parseInt();
+
         Serial.readString();
         Serial.println("Enter Date");
         while (!Serial.available()) {}
         int dd = Serial.parseInt();
+
         Serial.readString();
         Serial.println("Enter Month");
         while (!Serial.available()) {}
         int mn = Serial.parseInt();
+
         Serial.readString();
         Serial.println("Enter Year");
         while (!Serial.available()) {}
         int yy = Serial.parseInt();
+
         rtc.adjust(DateTime(yy, mn, dd, hh, mm, 0)); delay(100);
         Serial.println("Time and Date Updated");
       }
@@ -802,9 +867,9 @@ void read_sms()
     String response = gsmSerial.readString();
     response.trim();
     //Serial.println(response); // Print the raw response for debugging
-    // Check if the response contains the +CMT indicator 
-    
-   if (response.startsWith("+CMTI:"))
+
+    // Check if the response contains the +CMT indicator
+    if (response.startsWith("+CMTI:"))
     {
       gsmSerial.println("AT+CMGR=1");
       while (!gsmSerial.available() > 0);
@@ -812,12 +877,12 @@ void read_sms()
       response.trim();
       //Serial.println(response);
 
-  // Extract the phone number
+      // Extract the phone number
       int startIndex = response.indexOf(',') + 5;
       int endIndex = response.indexOf('"', startIndex);
       String incomingNumber = response.substring(startIndex, endIndex);
 
-  // Extract the message (second line)
+      // Extract the message (second line)
       int messageStartIndex = response.indexOf('\n') + 1;
       int messageEndIndex = response.indexOf('$', messageStartIndex);
       //messageStartIndex = response.indexOf('\n', messageStartIndex) + 1;
@@ -825,19 +890,19 @@ void read_sms()
       String message = response.substring(messageStartIndex, messageEndIndex);
       message.trim(); // Remove any extra whitespace or newlines
 
-   // Print the extracted phone number and message
-   //Serial.println("Phone Number: " + incomingNumber);
-   //Serial.println("Message: " + message);
+      // Print the extracted phone number and message
+      //Serial.println("Phone Number: " + incomingNumber);
+      //Serial.println("Message: " + message);
 
 
-   // Display on LCD
+      // Display on LCD
       lcd.clear();
       lcd.setCursor(0, 0);
       lcd.print("From:" + incomingNumber);
       lcd.setCursor(0, 1);
       lcd.print("Msg: " + message);
 
-   gsmSerial.println("AT+CMGD=1"); delay(3000);
+      gsmSerial.println("AT+CMGD=1"); delay(3000);
     }
   }
 }
